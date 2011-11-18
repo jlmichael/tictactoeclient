@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Login prompt
+-->
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"
+	title="TicTacToe" creationComplete="init()">
+  
+	<mx:Script>
+	<![CDATA[
+		
+	import fenrissoftwerks.ttt.events.LoginEvent;
+	import fenrissoftwerks.ttt.models.Model;
+	import mx.collections.ArrayCollection;
+		
+	[Bindable]
+	private var _model:Model = Model.getInstance();
+		
+	private function init():void {
+		
+		// Submit when the user hits enter.
+		this.addEventListener(KeyboardEvent.KEY_UP, function(event:KeyboardEvent):void {
+			if (event.charCode == 13) {
+				submit();
+			}
+		});
+	}
+			
+	private function submit():void {
+		dispatchEvent(new LoginEvent(username.text, password.text))
+		password.text = "";
+	}
+		
+	private function versionLabelFunction(item:Object):String {
+		return item.version;
+	}
+		
+	]]>
+	</mx:Script>
+  
+	<mx:Form>
+		<mx:FormItem label="Username:">
+			<mx:TextInput id="username"/>
+		</mx:FormItem>
+		<mx:FormItem label="Password:">
+			<mx:TextInput displayAsPassword="true" id="password"/>
+		</mx:FormItem>
+	</mx:Form>
+  
+	<mx:ControlBar horizontalGap="0">
+		<mx:Button label="Log-in" click="submit()"/>
+	</mx:ControlBar>
+</mx:Panel>

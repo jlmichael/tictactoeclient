@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:ttt="fenrissoftwerks.ttt.components.*"
+	layout="vertical"
+	verticalAlign="middle" backgroundGradientColors="[0xFFFFFF, 0xDDDDDD]"
+	applicationComplete="init()"
+	currentState="">
+	
+	<mx:Script>
+	<![CDATA[
+	
+	import fenrissoftwerks.ttt.models.Model;
+	import fenrissoftwerks.ttt.controllers.Controller;
+	
+	private var _controller:Controller;
+	
+	[Bindable]
+	private var _model:Model = Model.getInstance();
+	
+	
+	private function init():void {
+		_controller = new Controller(this as Application);
+	}
+	]]>
+    </mx:Script>
+
+	<ttt:LoginWindow id="login"/>  
+
+	<mx:states>
+	    <mx:State name="main">
+			<mx:RemoveChild target="{login}" />
+			<mx:AddChild>
+				<ttt:MainWindow id="main" width="100%" height="100%"/>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	
+</mx:Application>
