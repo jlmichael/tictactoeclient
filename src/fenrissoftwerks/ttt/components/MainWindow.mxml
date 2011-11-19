@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300">
+
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="1108" height="609">
+	<mx:Script>
+	<![CDATA[
+	
+	import fenrissoftwerks.ttt.events.*;
+
+	]]>
+    </mx:Script>
+    
+    <mx:Button x="10" y="577" label="Logout" click="dispatchEvent(new LogoutEvent())"/>
+    <mx:Image horizontalCenter="0" verticalCenter="-15" width="674" height="568" source="fenrissoftwerks/ttt/assets/board.png"/>
 	
 </mx:Canvas>
