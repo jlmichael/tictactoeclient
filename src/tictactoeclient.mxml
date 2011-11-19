@@ -4,7 +4,7 @@
 	layout="vertical"
 	verticalAlign="middle" backgroundGradientColors="[0xFFFFFF, 0xDDDDDD]"
 	applicationComplete="init()"
-	currentState="">
+	currentState="{_model.isLoggedIn ? 'main' : ''}">
 	
 	<mx:Script>
 	<![CDATA[
