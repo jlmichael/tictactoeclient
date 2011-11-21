@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="300">
+
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			private var _message:String;
+			
+			public function get message():String {
+				return _message;
+			}
+			
+			public function set message(message:String):void {
+				_message = message;
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Label x="147.5" y="10" text="Acknowledgement"/>
+	<mx:Text horizontalCenter="0" y="51" width="380" height="239" id="messageBox" text="{_message}"/>
+	
+</mx:Canvas>

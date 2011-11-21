@@ -8,7 +8,6 @@ package fenrissoftwerks.ttt.events {
     
 		private var _username:String;
 		private var _password:String;
-		private var _url:String;
     
  		public function LoginEvent(username:String, password:String, bubbles:Boolean=true, cancelable:Boolean=false) {	
 			super(LOGIN, bubbles, cancelable);

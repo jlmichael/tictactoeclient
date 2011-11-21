@@ -4,13 +4,40 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="1108" height="609">
 	<mx:Script>
 	<![CDATA[
+	import fenrissoftwerks.ttt.models.Model;
 	
 	import fenrissoftwerks.ttt.events.*;
+	
+	[Bindable]
+	private var _model:Model = Model.getInstance();
 
+	private function getImageSrc(x:int, y:int):String {
+		var xSrc:String = "fenrissoftwerks/ttt/assets/x.png";
+		var oSrc:String = "fenrissoftwerks/ttt/assets/o.png";
+		
+		var spotLetter:String = _model.board.getSpot(x, y);
+		if(spotLetter == 'x') {
+			return xSrc;
+		} else if(spotLetter == 'o') {
+			return oSrc;
+		}
+		
+		return "";
+	}
+	
 	]]>
     </mx:Script>
     
     <mx:Button x="10" y="577" label="Logout" click="dispatchEvent(new LogoutEvent())"/>
     <mx:Image horizontalCenter="0" verticalCenter="-15" width="674" height="568" source="fenrissoftwerks/ttt/assets/board.png"/>
+    <mx:Image horizontalCenter="-233" verticalCenter="-214" width="166" height="158" id="spot00" source="{getImageSrc(0,0)}"/>
+    <mx:Image horizontalCenter="0" verticalCenter="-216" width="166" height="158" id="spot10"/>
+    <mx:Image width="166" height="158" horizontalCenter="225" verticalCenter="-214" id="spot20"/>
+    <mx:Image horizontalCenter="-233" verticalCenter="-18" width="166" height="158" id="spot01"/>
+    <mx:Image horizontalCenter="0" verticalCenter="-18" width="166" height="158" id="spot11"/>
+    <mx:Image horizontalCenter="224" verticalCenter="-17" width="166" height="158" id="spot21"/>
+    <mx:Image width="166" height="158" horizontalCenter="-233" verticalCenter="178" id="spo02"/>
+    <mx:Image width="166" horizontalCenter="-1" verticalCenter="178" height="158" id="spot12"/>
+    <mx:Image horizontalCenter="224" verticalCenter="178" width="166" height="158" id="spot22"/>
 	
 </mx:Canvas>

@@ -8,7 +8,7 @@ Login prompt
 	<mx:Script>
 	<![CDATA[
 		
-	import fenrissoftwerks.ttt.events.LoginEvent;
+	import fenrissoftwerks.ttt.events.*;
 	import fenrissoftwerks.ttt.models.Model;
 	import mx.collections.ArrayCollection;
 		
@@ -20,14 +20,18 @@ Login prompt
 		// Submit when the user hits enter.
 		this.addEventListener(KeyboardEvent.KEY_UP, function(event:KeyboardEvent):void {
 			if (event.charCode == 13) {
-				submit();
+				login();
 			}
 		});
 	}
 			
-	private function submit():void {
+	private function login():void {
 		dispatchEvent(new LoginEvent(username.text, password.text))
 		password.text = "";
+	}
+	
+	private function create():void {
+		dispatchEvent(new CreatePlayerEvent(username.text, password.text));
 	}
 		
 	private function versionLabelFunction(item:Object):String {
@@ -47,6 +51,7 @@ Login prompt
 	</mx:Form>
   
 	<mx:ControlBar horizontalGap="0">
-		<mx:Button label="Log-in" click="submit()"/>
+		<mx:Button label="Log-in" click="login()"/>
+		<mx:Button label="Create" click="create()"/>
 	</mx:ControlBar>
 </mx:Panel>
