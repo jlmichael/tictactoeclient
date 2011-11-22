@@ -43,25 +43,33 @@ package fenrissoftwerks.ttt.controllers
 		
 		private function onSocketData(event:Event):void {
 			// Fetch the bytes
-            var message:String = readUTFBytes(this.bytesAvailable);
-            trace("Message looks like: " + message); 
+            var bytes:String = readUTFBytes(this.bytesAvailable);
+            var commands:Array = bytes.split('\001');
+            trace("Bytes looks like: " + bytes); 
             			
-			// Deserialize the incoming message to a Command
-			try {
-				var command:Command = CommandFactory.createCommand(message) as Command;
-			} catch (e:Error) {
-				trace("Got an error while decoding: " + e.message);
-			}
-			if(command == null) {
-				trace("Command was null after deserializing");
-			}
-			trace(command.toString());
-			
-			// Dispatch an IncomingCommand event
-			var incomingCommandEvent:IncomingCommandEvent = new IncomingCommandEvent(command);
-//			var incomingCommandEvent:LoginEvent = new LoginEvent("foo", "bar");
-			_application.dispatchEvent(incomingCommandEvent);
-			trace("Dispatched event");
+            var i:int;			
+            for(i = 0; i < commands.length; i++) {	
+            	var message:String = commands[i];
+            	// Get rid of the delimiter
+            	message = message.substring(0, message.length - 1);	
+            	trace("Message looks like: " + message);	
+				// Deserialize the incoming message to a Command
+				try {
+					var command:Command = CommandFactory.createCommand(message) as Command;
+				} catch (e:Error) {
+					trace("Got an error while decoding: " + e.message);
+				}
+				if(command == null) {
+					trace("Command was null after deserializing");
+				}
+				trace(command.toString());
+				
+				// Dispatch an IncomingCommand event
+				var incomingCommandEvent:IncomingCommandEvent = new IncomingCommandEvent(command);
+	//			var incomingCommandEvent:LoginEvent = new LoginEvent("foo", "bar");
+				_application.dispatchEvent(incomingCommandEvent);
+				trace("Dispatched event");
+            }
 		}
 
 		private function onIoError(event:Event):void {
