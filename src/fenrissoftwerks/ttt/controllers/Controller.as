@@ -2,10 +2,11 @@ package fenrissoftwerks.ttt.controllers
 {
 	import com.adobe.serialization.json.*;
 	
-	import fenrissoftwerks.ttt.controllers.handlers.DisplayAcknowledgementHandler;
+//	import fenrissoftwerks.ttt.controllers.handlers.DisplayAcknowledgementHandler;
 	import fenrissoftwerks.ttt.events.*;
 	import fenrissoftwerks.ttt.models.Command;
 	import fenrissoftwerks.ttt.models.Model;
+	import mx.controls.Alert;
 	
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
@@ -33,7 +34,7 @@ package fenrissoftwerks.ttt.controllers
 			_application.addEventListener(IncomingCommandEvent.INCOMINGCOMMAND, handleIncomingCommandEvent);
 			
 			// Set up command handler hash
-			_commandNameToHandlerMap["displayAcknowledgement"] = new DisplayAcknowledgementHandler(_application);
+//			_commandNameToHandlerMap["displayAcknowledgement"] = new DisplayAcknowledgementHandler(_application);
 		}
 		
 		private function handleLoginEvent(event:LoginEvent):void {
@@ -81,7 +82,7 @@ package fenrissoftwerks.ttt.controllers
 		}		
 		
 		private function handleIncomingCommandEvent(event:IncomingCommandEvent):void {
-			trace("in handleIncomingCommandEvent");
+			Alert.show("got it!!!");
 			// Get the command name and use it to determine which handler to call
 			var command:Command = event.command;
 			var commandName:String = command.commandName;

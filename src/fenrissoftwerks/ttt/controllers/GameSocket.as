@@ -2,22 +2,24 @@ package fenrissoftwerks.ttt.controllers
 {
 	import com.adobe.serialization.json.*;
 	
-	import fenrissoftwerks.ttt.events.LoginEvent;
+	import fenrissoftwerks.ttt.events.IncomingCommandEvent;
 	import fenrissoftwerks.ttt.models.Command;
 	import fenrissoftwerks.ttt.models.CommandFactory;
-	import fenrissoftwerks.ttt.events.IncomingCommandEvent;
 	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
+	
+	import mx.core.Application;
 
 	[Event(name="incomingcommand", type="fenrissoftwerks.ttt.events.IncomingCommandEvent")]
 	public class GameSocket extends Socket
 	{
+		private var _application:Application;
 		
-		public function GameSocket(host:String=null, port:int=0)
+		public function GameSocket(application:Application, host:String=null, port:int=0)
 		{
 			super(host, port);
 			addEventListener(Event.CONNECT, onConnect);
@@ -25,7 +27,7 @@ package fenrissoftwerks.ttt.controllers
 			addEventListener(Event.CLOSE, onClose);
 			addEventListener(ProgressEvent.SOCKET_DATA, onSocketData);
 			addEventListener(IOErrorEvent.IO_ERROR, onIoError);
-			
+			_application = application;
 		}
 		
 		private function onConnect(event:Event):void {
@@ -58,7 +60,7 @@ package fenrissoftwerks.ttt.controllers
 			// Dispatch an IncomingCommand event
 			var incomingCommandEvent:IncomingCommandEvent = new IncomingCommandEvent(command);
 //			var incomingCommandEvent:LoginEvent = new LoginEvent("foo", "bar");
-			dispatchEvent(incomingCommandEvent);
+			_application.dispatchEvent(incomingCommandEvent);
 			trace("Dispatched event");
 		}
 

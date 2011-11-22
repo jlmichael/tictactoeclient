@@ -14,7 +14,7 @@
 	import fenrissoftwerks.ttt.controllers.Controller;
 	
 	private var _controller:Controller;
-	private var _socket:GameSocket = new GameSocket();
+	private var _socket:GameSocket = new GameSocket(this as Application);
 	
 	[Bindable]
 	private var _model:Model = Model.getInstance();
